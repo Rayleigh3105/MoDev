@@ -1,0 +1,5 @@
+I recently wrote an Overview article about Software Testing now I´m going more specific about the methods of Functional Testing.
+I´m starting with Unit Testing. Aim of this blog post is to write an functional Unit test for an ApiController since I want to do that in my own Project.
+
+What is Unit Testing?
+Unit testing is usually performed by the developer who writes different code units. This type of test involves breaking your programm into pieces, and subjecting each piece to a series of tests.
