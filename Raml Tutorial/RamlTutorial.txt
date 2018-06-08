@@ -1,0 +1,310 @@
+Creating an REST Api Documentation the easy way - RAML Tutorial  :
+keyword -> raml tutorial
+
+Totally reading time 6min
+
+Today´s topic is about creating an Rest Api Documentation the easy way.
+There are several ways to crate an documenation, but the easiest way is RAML.
+I´m also new to RAML so I decided to make a raml tutorial, hope you enjoy it and learn something new.
+First off all let´s start of by telling you what RAML is exactly.
+
+----------------
+WHAT is RAML ?
+RAML stands for RESTful Api Modeling Language It´s a way of describing practically-RESTful APIs in a way
+that´s highly readabel by both humans and computers.
+RAML isn't strict: for now, it focuses on cleanly describing resources, methods, parameters, responses, media types,
+and other HTTP constructs that form the basis for modern APIs
+
+-----------------
+Why you should use RAML?
+Your API's structure is manifest and easily understood by everyone: developers, partners, and other API-consumers.
+
+So now let´s start using RAML I´m going to show you how to get started with this beautyful Api Modeling Language.
+
+------------------
+GETTING started with RAML
+
+I´m working with the RAML to HTML documentation generator https://github.com/raml2html/raml2html
+
+1. Install raml2html
+For installing the generator go to your console and type in
+
+npm i -g raml2html
+
+This will globally download the generator for you.
+
+2. Create RAML file
+Create a basic textfile with extension .raml for example call it apiDocumentation.raml
+Depending on your Version of RAML use #%RAML 1.0 or #%RAML 0.8
+
+apiDocumentation.raml
+#%RAML 1.0
+---
+title: Modev Api
+baseUri: http://api.modev.net/{version}
+version: v1
+
+After crating this file go over to your CMD.exe (Console) and change the directory to where you stored the apiDocumentation.raml file
+If you wanna see the result of your updated .raml file make sure to generate the html file first.
+To do that type follwing code into the console. Make sure to be in the right path.
+
+raml2html apiDocumentation.raml > apiDocumentation.html
+
+This will generate a html file based on the raml file. You can find the generate file in the same directory.
+
+This file will look like this :
+
+<picture of the raml file> raml2html.png
+
+2.1 Enter resources and methods
+In RAML you indicate a resource with a slash "/".Any methods and parameters nested under these top level resources belong to and act upon that resource.
+Here's where it starts to get interesting, as you decide what you want the developer to be able to do with the resources you've made available. Let's quickly review the 4 most common HTTP verbs:
+
+GET - Retrieve the information defined in the request URI.
+
+PUT - Replace the addressed collection. At the object-level, create or update it.
+
+POST - Create a new entry in the collection. This method is generally not used at the object-level.
+
+DELETE - Delete the information defined in the request URI.
+
+apiDocumentation.raml
+#%RAML 1.0
+---
+title: modec Api
+baseUri: http://api.modev.net/{version}
+version: v1
+
+/books:
+  get:
+  put:
+  post:
+
+The Api Documentation look now like this:
+
+<picture of the raml file> raml2html_01
+
+2.2 URI parameters
+What are URI parameters ?
+- Part of the URL to access resources.
+- To have dynamic resources, to act upon the more granular objects of the resources.
+- Used for nesting of resources.
+- Denoted by surrounding curly brackets in RAML.
+- List item
+
+e.g
+
+/books
+  /{bookTitle}
+
+Now we add an URI Parameter to our .raml file
+apiDocumentation.raml
+#%RAML 1.0
+---
+title: modec Api
+baseUri: http://api.modev.net/{version}
+version: v1
+
+/books:
+  get:
+  put:
+  post:
+  /{bookTitle}:
+    get:
+    put:
+    delete:
+    /author:
+      get:
+    /publisher:
+      get:
+
+Remember after changing the .raml file -> generate the html file with following code in your console
+
+raml2html apiDocumentation.raml > apiDocumentation.html
+The Api Documentation look now like this:
+
+<picture of the raml file> raml2html_02
+
+2.3 Query Parameters
+- To be passed to methods, to extend the functionality of the API.
+- To make developers to be able to perform more powerful actions, like filtering a collection based on passed parameters.
+- Query parameters may also be something that the server requires to process the API consumer's request, like an access token.
+- Query parameters have some attributes associated with them to define them in a better way.
+
+Those query parameters can also be described with attributes like 'description' or 'type' whatever you want.
+
+e.g
+
+/books:
+  get:
+    queryParameters:
+      author:
+      publicationYear:
+      rating:
+      isbn:
+  put:
+  post:
+
+Now, specify attributes for each of the query parameters you defined above. As always, be as complete in your documentation as possible:
+
+apiDocumentation.raml
+#%RAML 1.0
+---
+title: Modev Api
+baseUri: http://api.modev.net/{version}
+version: v1
+
+/books:
+  /{bookTitle}
+    get:
+      queryParameters:
+        author:
+          displayName: Author
+          type: string
+          description: An author's full name
+          example: Mary Roach
+          required: false
+        publicationYear:
+          displayName: Pub Year
+          type: number
+          description: The year released for the first time in the US
+          example: 1984
+          required: false
+        rating:
+          displayName: Rating
+          type: number
+          description: Average rating (1-5) submitted by users
+          example: 3.14
+          required: false
+        isbn:
+          displayName: ISBN
+          type: string
+          minLength: 10
+          example: 0321736079?
+    put:
+      queryParameters:
+        access_token:
+          displayName: Access Token
+          type: string
+          description: Token giving you permission to make call
+          required: true
+
+The Api Documentation look now like this:
+
+<picture of the raml file> raml2html_03
+
+2.3 Responses
+Great job so far, keep it up! Now we arrived at the last chapter "Responses".
+There are two way of including responses in RAML i´m going to show you the way how it is not quite nice.
+In the end it will look the same.
+
+NOT NICE WAY BUT ABSOLUTLY OK
+
+/books:
+  /{bookTitle}:
+    get:
+      description: Retrieve a specific book title
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {
+                  "data": {
+                    "id": "SbBGk",
+                    "title": "Stiff: The Curious Lives of Human Cadavers",
+                    "description": null,
+                    "datetime": 1341533193,
+                    "genre": "science",
+                    "author": "Mary Roach",
+                    "link": "http://e-bookmobile.com/books/Stiff",
+                  },
+                  "success": true,
+                  "status": 200
+                }
+
+NICE WAY
+You can also outsource the example into a json file.
+Create a file called booktitle_example.json and copy your example json in there.
+Example JSON
+{
+  "data": {
+    "id": "SbBGk",
+    "title": "Stiff: The Curious Lives of Human Cadavers",
+    "description": null,
+    "datetime": 1341533193,
+    "genre": "science",
+    "author": "Mary Roach",
+    "link": "http://e-bookmobile.com/books/Stiff",
+  },
+  "success": true,
+  "status": 200
+}
+
+
+/books:
+  /{bookTitle}:
+    get:
+      description: Retrieve a specific book title
+      responses:
+        200:
+          body:
+            application/json:
+              example: !include pathtoJsonFile
+
+Now include that code to your existing .raml file
+
+apiDocumentation.raml
+#%RAML 1.0
+---
+title: Modev Api
+baseUri: http://api.modev.net/{version}
+version: v1
+
+/books:
+  /{bookTitle}:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              example: !include booktitle_example.json
+      queryParameters:
+        author:
+          displayName: Author
+          type: string
+          description: An author's full name
+          example: Mary Roach
+          required: false
+        publicationYear:
+          displayName: Pub Year
+          type: number
+          description: The year released for the first time in the US
+          example: 1984
+          required: false
+        rating:
+          displayName: Rating
+          type: number
+          description: Average rating (1-5) submitted by users
+          example: 3.14
+          required: false
+        isbn:
+          displayName: ISBN
+          type: string
+          minLength: 10
+          example: 0321736079?
+    put:
+      queryParameters:
+        access_token:
+          displayName: Access Token
+          type: string
+          description: Token giving you permission to make call
+          required: true
+
+As you can see the example is included in an outsourced json file. This is much more clearer.
+Now we are at the end of the tutorial :(
+I hope you learned something new because I did. Make sure to leave a comment below and thanks for your time.
+
+SOURCE:
+- https://forums.mulesoft.com/questions/49980/difference-between-query-params-and-uri-params-how.html
+- https://raml.org/developers/raml-100-tutorial
