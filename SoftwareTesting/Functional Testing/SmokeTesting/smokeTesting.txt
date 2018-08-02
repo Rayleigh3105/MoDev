@@ -1,0 +1,24 @@
+Today I want to expand the Software Testing Blog Series with the Smoke Test. In this blog post I want to learn what a smoke test does and why its here.
+Hope you guys are also tuned to learn a new Software Testing Method, now let´s begin with a little overview what Smoke Testing particular is.
+
+What is Smoke Testing?
+Smoke testing is done by developers before a first release, or even by testers, before accepting a build for further testing.
+
+In general, a smoke test is a collection of tests that new or repaired software has to go through. Sometimes these tests are already done automatically, eg. From the development system that also compiles the software. In this context, smoking testing is the verification of changes in the source code before they enter the official repositories.
+
+A smoke test, more formally also build verification test, is a superficial check of the program functions. The tester goes through the whole program and tries things like "Can I use this feature at all?", "Does this open a window?", "Are all buttons on this window doing anything?". As soon as a fundamental question like this one can be answered with "no", there is no need to test further. The program is so unfinished or broken that further testing would be nonsensical. These logged tests can be manual or automated. The automatic test procedures are usually performed directly after compilation, usually in the form of module tests.
+
+Who tests the Smoke Test?
+It may seem practical if the developer does the smoke test, after all, he knows the software best himself. However, he also wears his "developer glasses".
+Also the developer ca not necessarily put into the user behavior, because the approach of an developer may be different to a users approach.
+Therefore it is useful if one or more external tester check the software. In the best case, a close cooperation takes place and the developer responds quickly to the feedback from the testers.
+
+Smoke Testing Example
+In a project there are five modules like login, view user, user detail page, new user creation and task creation etc.
+In these five modules, the developer will first perform the smoke testing by executing all the major functionality of modules like user is able to login with valid login credentials or not, after login new user can be created or not, user that is created is viewed or not etc.
+It makes it obvious that the smoke test is always done by developing team before submitting the build to the testing team.
+
+Advantages of Smoke Testing:
+It helps to find issues introduced in integration of modules.
+It helps to find issues in the early phase of testing.
+It helps to get confidence to tester that fixes in the previous builds not breaking major features (only features exercised by smoke testing).

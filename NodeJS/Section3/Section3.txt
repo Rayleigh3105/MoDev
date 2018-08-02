@@ -1,0 +1,190 @@
+In this blog post I�d like to tell you what I learned in the course I�m taking about NodeJS. I decided to document every Section what I learned.
+This Section is dedicated to Asynchronous Node.js. Let�s start of by learning more about the synchronous and asynchronous operations in nodejs.
+1. Synchrounous and Aysnchronous operations
+2. What is a call Stack?
+3. Callback queue and Event Loop
+4. Promises in javascript
+
+1. Synchrounous and Asynchronous Operations
+Also i did get in touch with asynchronous operations in javascript. Until now I never understood asyncronous function calls.
+But after working with asynchronous operations a little bit it is less confusing.
+So I�m trying to document my what synchronous operations are and what asynchronous operations are.
+
+First of lets start with the synchronous operations, I�ll give you a quick example.
+
+A synchronous operaton example:
+A very basic synchronous program would be construced something like this:
+
+let syncTest = () => {
+    console.log('first');
+    console.log('last');
+}
+syncTest();
+
+There is nothing asynchronous going on here. 'First' is always going to be logged to to console before 'last'
+/code
+node app.js
+first
+last
+
+An asynchronous operation exammple
+In order to create an asynchrnous call we can use the 'setTimeout' method. This take two arguments. The first argument will be a callback function,
+and the second is the amount of time to delay calling that function in milliseconds.
+
+Adding 'setTimeout()' to the above synchronous call looks like this:
+let asyncTest = () => {
+    console.log('first');
+    setTimeout(() => console.log('second'), 2000);
+    console.log('last');
+}
+asyncTest();
+
+The output is a bit different to the last.
+/code
+node app.js
+first
+last
+second
+
+Why does 'second' get printed after 'last'. Because that console.log() statement is is a callback function which gets executed out of order -> it must wait until the call Stack is empty
+And sine Javascript is non-blocking it continues on executing more functions. In this case, 'last' gets executed and then finally after there are no other functions to call the callback is
+printed to the screen.
+
+I always thought the callback gets executed out of order due the delay in setTimeout(). But the reason why the callback gets executed out of order is the callback.
+Take a look at this example
+
+let asyncTest = () => {
+    console.log('first');
+setTimeout(() => console.log('second'), 0);
+console.log('last');
+}
+asyncTest();
+
+The delay is set to zero, but the output is still the same
+
+node app.js
+first
+last
+second
+
+Why did 'second' show up after 'last'. As I mentioned above callback functions are getting executed out of order.
+To understand this we�ll have to examine a few behind-the-scenes pieces of Javascript. Namely the call stack, the event loop, and the callback queue.
+
+2. What is a Call Stack?
+The call stack is a mechanism in Javascript used to keep track of where it is in a program.
+It knows which functions are currently being run and which to call next.
+The catch with the call stack is that you can only add things to the top of the stack. It�s a last-in-first-out (LIFO) idea.
+
+When a function is called, it is added to the top of the stack and run.
+If that function calls another function, it is then added to the top of the stack and then it is run.
+Only the function at the top of the stack is the one that can be run.
+
+3. Callback queue and event loop
+In an asynchronous program, there are a few more pieces that come into the mix. The first is the callback queue.
+This is a kind of holding area where callback functions go once they are called.
+The callback queue works together with the event loop to execute callback functions at the right time.
+The event loop checks the call stack to see if it is empty. If it is then the first callback function in the callback queue gets executed, then the second etc.
+If the call stack is not empty, then those callback functions wait.
+
+This is why callback functions show up after all of the functions in the main part of the program.
+Because they have to go through the callback queue and only get put into the call stack by the event loop once the call stack is empty.
+
+This is what causes output from a callback function to appear after all of the other non-callback functions. The non-callback functions are like VIPs that don�t have to wait in line to get executed. Meanwhile, those callback functions are being held in a separate queue until it is their turn.
+
+So I hope you understand now asynchronous operations and how they are getting executed. I defenitly learned a lot of new things. Let�s move on with Promises in javascript.
+
+
+4. Promises in Javascript
+A promise is an object that may produce a single value some time in the future: either a resolved value, or a reason that it�s not resolved (e.g., a network error occurred).
+A promise may be in one of 3 possible states:
+- Promise is pending: You don�t know if you will get a response -> aysnchronous operation is not yet completed
+- Promise is resolved: The Request was successfull to the server and it response with data -> asynchronous operation has completed
+- Promise is rejected: The Request was not successfull to the server due a network error -> asynchronuos operation failed
+
+
+Creating a Promise
+Syntax of a Promise:
+/code
+new Promise(function(resolve, reject) { ... });
+Let�s write a function that return a Promise. This Promise is going to handle a Request to a Server or API.
+
+First let�s start of with installing request. With this library we can do http request out of Node
+Go to the directory you where you want to install Request. and type in
+npm install request -g
+
+/code
+promise.js
+var request = require('request');
+
+getGitHubData();
+
+function getGitHubData() {
+  // Setting URL and headers for request
+    var options = {
+        url: `https://api.github.com/users/rayleigh3105`,
+        headers: {
+            'User-Agent': 'request'
+        }
+    };
+    return new Promise((resolve, reject)=>{
+        request( options, function (error, res, body) {
+            if (error){                                       // Checks if an Error Object is existing
+		            reject(error);                                // Promise does get rejected which means the asynchrnous operation failed
+	             } else {
+                   console.log('Data of my Github Account');  // Print data
+                   console.log(JSON.parse(body));
+		               resolve(JSON.parse(body));                 // Prime does get resolved which mens the asynchronous operation has completed
+	             }
+        });
+    });
+}
+
+So what does this promise do ?
+This Promise ask the Github API to make an GET Request to URL `https://api.github.com/users/rayleigh3105` (my user).
+At first we check if the response of the github API does contain a Error object. If not we print out the data from the server and resolve the Promise.
+
+This is the Output:
+
+/code
+{
+ login: 'Rayleigh3105',
+  id: 18745016,
+  node_id: 'MDQ6VXNlcjE4NzQ1MDE2',
+  avatar_url: 'https://avatars2.githubusercontent.com/u/18745016?v=4',
+  gravatar_id: '',
+  url: 'https://api.github.com/users/Rayleigh3105',
+  html_url: 'https://github.com/Rayleigh3105',
+  followers_url: 'https://api.github.com/users/Rayleigh3105/followers',
+  following_url: 'https://api.github.com/users/Rayleigh3105/following{/other_user}',
+  gists_url: 'https://api.github.com/users/Rayleigh3105/gists{/gist_id}',
+  starred_url: 'https://api.github.com/users/Rayleigh3105/starred{/owner}{/repo}',
+  subscriptions_url: 'https://api.github.com/users/Rayleigh3105/subscriptions',
+  organizations_url: 'https://api.github.com/users/Rayleigh3105/orgs',
+  repos_url: 'https://api.github.com/users/Rayleigh3105/repos',
+  events_url: 'https://api.github.com/users/Rayleigh3105/events{/privacy}',
+  received_events_url: 'https://api.github.com/users/Rayleigh3105/received_events',
+  type: 'User',
+  site_admin: false,
+  name: null,
+  company: null,
+  blog: '',
+  location: null,
+  email: null,
+  hireable: null,
+  bio: null,
+  public_repos: 9,
+  public_gists: 0,
+  followers: 0,
+  following: 0,
+  created_at: '2016-04-29T21:58:47Z',
+  updated_at: '2018-07-24T18:19:01Z'
+}
+
+So that´s what I learned in the third Section of my NodeJs developer course. I´m going to create a blog post about Promise so stay in touch with my blog.
+
+Greetings
+Moritz
+
+Credits:
+https://medium.com/dev-bits/writing-neat-asynchronous-node-js-code-with-promises-32ed3a4fd098
+https://medium.com/@thejasonfile/how-node-and-javascript-handle-asynchronous-functions-7feb9fc8a610

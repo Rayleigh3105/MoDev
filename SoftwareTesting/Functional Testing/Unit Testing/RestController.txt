@@ -1,0 +1,46 @@
+package com.benny.APIController;
+
+import com.benny.Entity.Test;
+import com.benny.Service.TestService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+
+@RestController
+public class TestAPIController {
+
+    @Autowired
+    private TestService testService;
+
+    @RequestMapping(value = "/tests/get/{test_id}", method = RequestMethod.GET)
+    public ArrayList<Test> getTest(@PathVariable("test_id") Long testID){
+
+        return testService.getTest(testID);
+    }
+
+    @RequestMapping(value = "/tests/getAllTests", method = RequestMethod.GET)
+    public ArrayList<Test> getTests(){
+
+        return testService.getTests();
+    }
+
+    @RequestMapping(value = "/test/save", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void saveTest(@RequestBody Test test){
+
+        testService.saveTest(test);
+    }
+
+    @RequestMapping(value = "/test/update", method = RequestMethod.PATCH, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void updateTest(@RequestBody Test test){
+
+        testService.updateTest(test);
+    }
+
+    @RequestMapping(value = "/test/delete/{test_id}", method = RequestMethod.DELETE)
+    public void deleteTest(@PathVariable("test_id") Long id){
+
+        testService.deleteTest(id);
+    }
+}

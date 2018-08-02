@@ -1,0 +1,98 @@
+keyword = integration tests
+Software Testing Methods - What are Integration Test?
+Slug: Integration Testing is used to test individual software components or units of code to verfiy interaction between various software components and detect interface defects.
+
+On my side project where write test´s for a RESTAPi with Spring Boot. I finished writing Unit Tests for The RESTApiController but now I want to learn what Integration Tests are and why we need them.
+So I decided to write a blog post about it since i´m doing the Software Testing Types and Method blog series. Let´s start of
+
+What are Integration Test?
+Integration testing is a critical phase in the software development process in which individual units are combined and tested collectively, with a focus on the interfaces between applications.
+This typically occurs after unit testing has been completed and before system testing, providing a bridge between software functionality and full system operation.
+
+Example:
+For example you have to test the keyboard of a computer than it is a unit testing but when you have to combine the keyboard and mouse of a computer together to see its working or not than it is the integration testing.
+So it is prerequisite that for performing integration testing a system must be unit tested before.
+
+Advantages of Integration Tests
+Easy to integrate with daily builds and easy to test in development environment
+Code Coverage is higher and easy to track.
+Tests are more reliable and easy to isolate the failures.
+Tests run faster compared to end to end tests.
+Be it top down or bottom up approach of Integration Testing, the testing starts at the very early stages of development and bugs are caught earlier rather than late in the cycle.
+
+Strategies of Integration Testing
+Big Bang approach
+Incremental approach
+  Top Down approach
+  Bottum up approach
+  Sandwich approach -> Top Down and Bottom Up combination
+
+
+
+
+Big Bang Integration Testing
+All the modules or components are integrated before and after this everything is tested as a whole.
+In this type of testing all units or components are linked at once which result into a complete system. If gives us a complete system after integration which on which we can start testing.
+
+big_bang_approach.png
+
+Advantages
+Big bang integration testing is used to test the complete system.
+All the modules are completed before the start of integration testing.
+Big bang testing is cost effective.
+
+Disadvantages
+If any bug is found it becomes difficult to detach all the modules on order to find out its root cause.
+This approach is quite challenging and risky, as all the modules and components are integrated together in a single step.
+Since all the modules are tested together chances of failure increases
+
+
+
+Bottom up Integration
+Bottom-Up Integration testing is a kind of testing methodology in which the modules are tested from the bottom of control flow upwards. Bottom-Up integration testing is opposite to the Top-down integration testing.
+In this testing first the bottom modules of lower levels are tested and then the higher level modules are tested.
+
+Advantages
+Fault localization is easier.
+No time is wasted waiting for all modules to be developed unlike Big-bang approach.
+Test conditions are easier to create.
+
+Disadvantages
+Early prototype is not possible.
+The program as a substance does not exist until the point when the last module included.
+
+
+
+
+Top Down Integration
+This form of testing involves testing the high level or parent module(s) first, then testing lower level or child modules as development is completed and they are integrated.
+Stubs are used to simulate the data response of lower level modules until they are completed and integrated.
+
+top_down.png
+
+Advantages
+Fault Localization is easier.
+Possibility to obtain an early prototype.
+Critical Modules are tested on priority; major design flaws could be found and fixed first.
+
+Disadvantages
+Modules at lower level are tested inadequately.
+
+
+
+Sandwich testing:
+It combines the advantages of both Bottom-up testing and Top-down testing at a time.Bottom-up testing starts from middle layer and goes upward to the top layer where as Top-down testing starts from middle layer and goes downward.
+ Big-bang approach is followed for the middle layer. From this layer bottom-up approach goes upwards and top-down approach goes downwards.
+
+Advantages
+Sandwich approach is useful for very large projects having several subprojects.When development follows a spiral model and the modul itself is as large as a system, then one can use sandwich testing.
+Both Top-down and Bottom-up approach starts at a time as per development schedule. Units are tested and brought together to make a system .Integration is done downwards.
+It needs more resources and big teams perform both bottom-up and top-down methods of testing at a time or one after the other.
+
+Disadvantages
+It require very high cost for testing because one part has Top-down approach while another part has bottom-up approach.
+It cannot be used for smaller system with huge interdependence between different modules.It makes sense when the individual subsystem is as good as complete system.
+Different skill sets are required for tester at different level as module are separate system handling separate domains like ERP products with modules representing different functional areas.
+
+
+https://www.zyxware.com/articles/4139/what-is-sandwich-testing

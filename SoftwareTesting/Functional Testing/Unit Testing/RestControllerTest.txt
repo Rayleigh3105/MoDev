@@ -1,0 +1,122 @@
+package com.benny.APIController.ApiControllerTest;
+import com.benny.APIController.TestAPIController;
+import com.benny.Service.TestService;
+import static org.hamcrest.Matchers.*;
+import static org.mockito.BDDMockito.given;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import java.util.ArrayList;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@WebMvcTest(TestAPIController.class)
+public class TestApiControllerTest {
+
+    @Autowired    // The @Autowired annotation tells Spring where an injection needs to occur.
+    private MockMvc mockMvc;
+
+    @Autowired
+    private ObjectMapper mapper;
+
+    @MockBean   // Annotation that can be used to add mocks to a Spring ApplicationContext
+    private TestService testService;
+
+    com.benny.Entity.Test first = new com.benny.Entity.Test();
+    com.benny.Entity.Test second = new com.benny.Entity.Test();
+    com.benny.Entity.Test third = new com.benny.Entity.Test();
+
+    @Before
+    public void setup() {
+        first.setId(1L);
+        first.setFirstname("Moritz");
+        first.setLastname("Vogt");
+
+        second.setId(2L);
+        second.setFirstname("Benjamin");
+        second.setLastname("Haid");
+
+        third.setId(3L);
+        third.setFirstname("Mehmet");
+        third.setLastname("Yildiz");
+    }
+
+    @Test   // The Test annotation tells JUnit that the public void method to which it is attached can be run as a test case.
+    public void getAllTests() throws Exception {
+        ArrayList<com.benny.Entity.Test> allTests = new ArrayList<com.benny.Entity.Test>();
+        allTests.add(first);
+        allTests.add(second);
+        allTests.add(third);
+
+        given(testService.getTests()).willReturn((ArrayList<com.benny.Entity.Test>) allTests);
+
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/tests/getAllTests"))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(jsonPath("$", hasSize(3)))
+                .andExpect(jsonPath("$[0].firstname", is(first.getFirstname())))
+                .andExpect(jsonPath("$[0].lastname", is(first.getLastname())))
+                .andExpect(jsonPath("$[1].firstname", is(second.getFirstname())))
+                .andExpect(jsonPath("$[1].lastname", is(second.getLastname())))
+                .andExpect(jsonPath("$[2].firstname", is(third.getFirstname())))
+                .andExpect(jsonPath("$[2].lastname", is(third.getLastname())));
+    }
+
+    @Test
+    public void getTestById() throws Exception{
+        ArrayList<com.benny.Entity.Test> allTests = new ArrayList<com.benny.Entity.Test>();
+        allTests.add(first);
+
+        given(testService.getTest(first.getId())).willReturn((ArrayList< com.benny.Entity.Test >) allTests);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/tests/get/{test_id}", first.getId()))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(jsonPath("$", hasSize(1) ))
+                .andExpect(jsonPath("$[0].firstname", is(first.getFirstname())))
+                .andExpect(jsonPath("$[0].lastname", is(first.getLastname())));
+    }
+
+    @Test
+    public void saveTest() throws Exception {
+        String json = mapper.writeValueAsString(first);
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/test/save")
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .content(json)
+                .accept(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void updateTest() throws Exception {
+        first.setFirstname("Joel");
+        String json = mapper.writeValueAsString(first);
+
+        mockMvc.perform(MockMvcRequestBuilders.patch("/test/update")
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .content(json)
+                .accept(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void deleteTest () throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.delete("/test/delete/{test_id}", third.getId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
+}

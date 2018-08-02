@@ -1,0 +1,44 @@
+key = stress testing
+Software Testing Methods - What is Stress Testing?
+
+Stress testing is testing that checks the upper limits of your system by testing it under extreme loads.
+
+I´m doing a blog Series about Software Testing Types and Methods and this blog post is about Stress Testing.
+Make sure to check out my other posts about Software Testing.
+
+
+What is Stress Testing?
+Load testing is a type of non-functional testing and kind of a Performance Testing and is used to observe the stability of the application or server. The main purpose of this testing is to identify the breaking point of the system.
+It defines the upper limit of the application by increasing the application environment to its maximum level.
+Under normal condition, an application can perform well but in the process of stress testing, a number of issues can be tracked in your application. However, it helps in determining the robustness of the application and also in ensuring its recovery from failure.
+
+Exmpample:
+Attempting to hack into a computer and use it as a zombie to spread spam
+Flooding a server with useless e-mail messages
+Attempting to infect a system with viruses, Trojans, spyware or other malware.
+
+Advatages Stress Testing
+Determines the side effects of common hardware or supporting application failures.
+Defines if data can be corrupted by overstressing the system.
+Stress Testing can provide you with the neccessarydata that is hard to find anywhere else
+Makes it easier to test an application’s concurrency
+
+Types of Stress Testing:
+Here are a few types of stress testing that are generally involved and practiced while putting an application under stress:
+
+Application Stress Testing
+Application Stress Testing helps in uncovering defects like network congestion, data blocking and locking, and performance bottlenecks of different methods across the application.
+
+Transactional Stress Testing
+This type of stress testing is aimed at testing the application’s working capability at a transactional level with load volumes that are beyond its anticipated production operations. Such test helps in optimizing, tuning, and finding error conditions at the particular component level.
+
+System Strss Testing:
+Systemic Stress Testing involves pushing the expected capabilities of multiple applications that run on the same system by generating extreme load conditions. The main goal of this process is to uncover defects in circumstances where different applications block each other to vie for using system resources like memory, disk space, network bandwidth, and processor cycles.
+
+Difference between Load Testing and Stress Testing
+Load testing differs from stress testing, which evaluates the extent to which a system keeps working when subjected to extreme work loads or when some of its hardware or software has been compromised.
+The primary goal of load testing is to define the maximum amount of work a system can handle without significant performance degradation.
+
+Thanks for reading through this if you like my content and my way to learn new things let me know.
+Ne next blog post will be about Stress Testing so stay in touch with my blog.
+Have a great day and keep learning

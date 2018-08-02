@@ -1,0 +1,46 @@
+What is Alexa Skill? - Brief Overview
+Keyword = Alexa Skill
+Alexa is a voice service available on devices like Amazon Echo, Echo Dot or Echo Show.
+
+
+
+I recently discoverd Alexa Skill so I thought why not write a blog post about it. Maybe next week I´m going to try and code a Alexa Skill and share it with you.
+
+What is Alexa Skill?
+Alexa is a voice service available on devices like Amazon Echo, Echo Dot or Echo Show.
+Alexa provides users with skills and spoken instructions, such as the ability to play music, get answers to common questions, set an alarm or timer, and more.
+The best thing about is you can programm such a skill on your own and its not that difficult.
+
+What can you develop with Alexa?
+With the Alexa Skills Kit, you can add features to Smart Home devices, deliver new content, enable voice control for services, and more.
+Revolutionize the user experience with Alexa.
+
+Smart Home-Skills
+Alexa offers features or skills that help users build a more personalized environment.
+With Alexa, users have the option of smart home devices, such as: As cameras, door locks, entertainment systems, lighting and thermostats to control.
+
+Games and trivia skills
+Controlling games with the language is the newest and most exciting development in gaming.
+The pioneers of voice-driven games are exploring new ways to captivate players with interactive adventures, family games, quizzes and more.
+Complete your wildest game ideas with voice control. Build a fan base - reach millions of Alexa devices through Alexa.
+You can even get Developer Rewards for it. Develop your game and determine the future of gaming.
+https://www.youtube.com/watch?v=WA20rRVfe1Y
+
+Flash Briefing-Skills
+The Flash Briefing Skill API is an extension of the Alexa Skills Kit (ASK) that allows developers to put their feeds into the Alexa Flash Briefing, a service that provides users with pre-recorded audio clips and reads messages by voice.
+Examples of flash briefing skills include news from well-known broadcasters and blogs, latest headlines, and the weather forecast.
+
+Custom Skills
+Erweitere deine Idee oder bereits bestehende Services um eine sprachliche Interaktion.
+Entwickle ein benutzerdefiniertes Interaktionsmodell, mit dem deine Nutzer beispielsweise ein Taxi rufen, Pizza bestellen oder Informationen heraussuchen können – sprachgesteuert und ohne einen Finger zu rühren.
+
+Skills for Children
+
+Video Skills
+The Video Skill API is a new addition to the Alexa Skills Kit (ASK), which can be used to teach Alexa new skills. Alexa includes a number of built-in video content search and playback features.
+These skills include, for example, the ability to search for a TV show, play a movie, or switch the TV program. Alexa can now be taught how to control video content and services.
+This means that you can develop voice-driven user guides that allow users to easily browse and use video content without having to go through a specific skill. For example, users simply say, "Alexa, play Manchester by the Sea" without having to specify a vendor or device.
+
+Skills für Echo Show
+All Alexa skills can be used automatically with Echo Show and Echo Spot. The skills show all skill cards that you currently have in your response items.
+This is the current display of your Alexa skill cards in the Alexa app, very similar to Fire TVs and Fire tablets. If no skill card is available, a default template will display the icon and name of the skill.

@@ -1,0 +1,129 @@
+In this blog post I´d like to tell you what I learned in the course I�m taking about NodeJS. I decided to document every Section what I learned.
+In section 3 of my NodeJS course I came accross Promises in javascript, I´d like to know more about Promises. So I decided to write a blog post about it, hope you enjoy it and learned something new.
+
+1. Creating a Promise
+2. Promise Chaining
+
+A promise is an object that may produce a single value some time in the future: either a resolved value, or a reason that it�s not resolved (e.g., a network error occurred).
+A promise may be in one of 3 possible states:
+- Promise is pending: You don�t know if you will get a response -> aysnchronous operation is not yet completed
+- Promise is resolved: The Request was successfull to the server and it response with data -> asynchronous operation has completed
+- Promise is rejected: The Request was not successfull to the server due a network error -> asynchronuos operation failed
+
+
+Creating a Promise
+Syntax of a Promise:
+/code
+new Promise(function(resolve, reject) { ... });
+Let�s write a function that return a Promise. This Promise is going to handle a Request to a Server or API.
+
+First let�s start of with installing request. With this library we can do http request out of Node
+Go to the directory you where you want to install Request. and type in
+npm install request -g
+
+/code
+promise.js
+var request = require('request');
+
+getGitHubData();
+
+function getGitHubData() {
+  // Setting URL and headers for request
+    var options = {
+        url: `https://api.github.com/users/rayleigh3105`,
+        headers: {
+            'User-Agent': 'request'
+        }
+    };
+    return new Promise((resolve, reject)=>{
+        request( options, function (error, res, body) {
+            if (error){                                       // Checks if an Error Object is existing
+		            reject(error);                                // Promise does get rejected which means the asynchrnous operation failed
+	             } else {
+                   console.log('Data of my Github Account');  // Print data
+                   console.log(JSON.parse(body));
+		               resolve(JSON.parse(body));                 // Prime does get resolved which mens the asynchronous operation has completed
+	             }
+        });
+    });
+}
+
+So what does this promise do ?
+This Promise ask the Github API to make an GET Request to URL `https://api.github.com/users/rayleigh3105` (my user).
+At first we check if the response of the github API does contain a Error object. If not we print out the data from the server and resolve the Promise.
+
+This is the Output:
+
+/code
+{
+ login: 'Rayleigh3105',
+  id: 18745016,
+  node_id: 'MDQ6VXNlcjE4NzQ1MDE2',
+  avatar_url: 'https://avatars2.githubusercontent.com/u/18745016?v=4',
+  gravatar_id: '',
+  url: 'https://api.github.com/users/Rayleigh3105',
+  html_url: 'https://github.com/Rayleigh3105',
+  followers_url: 'https://api.github.com/users/Rayleigh3105/followers',
+  following_url: 'https://api.github.com/users/Rayleigh3105/following{/other_user}',
+  gists_url: 'https://api.github.com/users/Rayleigh3105/gists{/gist_id}',
+  starred_url: 'https://api.github.com/users/Rayleigh3105/starred{/owner}{/repo}',
+  subscriptions_url: 'https://api.github.com/users/Rayleigh3105/subscriptions',
+  organizations_url: 'https://api.github.com/users/Rayleigh3105/orgs',
+  repos_url: 'https://api.github.com/users/Rayleigh3105/repos',
+  events_url: 'https://api.github.com/users/Rayleigh3105/events{/privacy}',
+  received_events_url: 'https://api.github.com/users/Rayleigh3105/received_events',
+  type: 'User',
+  site_admin: false,
+  name: null,
+  company: null,
+  blog: '',
+  location: null,
+  email: null,
+  hireable: null,
+  bio: null,
+  public_repos: 9,
+  public_gists: 0,
+  followers: 0,
+  following: 0,
+  created_at: '2016-04-29T21:58:47Z',
+  updated_at: '2018-07-24T18:19:01Z'
+}
+
+2. Chaining Promises
+Chaining promises can make asynchronous code flow synchronously.
+
+/code
+var firstMethod = function() {
+   var promise = new Promise(function(resolve, reject){
+      setTimeout(function() {
+         console.log('first method completed');
+         resolve({data: '123'});
+      }, 2000);
+   });
+   return promise;
+};
+
+
+var secondMethod = function(someStuff) {
+   var promise = new Promise(function(resolve, reject){
+      setTimeout(function() {
+         console.log('second method completed');
+         resolve({newData: someStuff.data + ' some more data'});
+      }, 2000);
+   });
+   return promise;
+};
+
+var thirdMethod = function(someStuff) {
+   var promise = new Promise(function(resolve, reject){
+      setTimeout(function() {
+         console.log('third method completed');
+         resolve({result: someStuff.newData});
+      }, 3000);
+   });
+   return promise;
+};
+
+firstMethod()
+   .then(secondMethod)
+   .then(thirdMethod);

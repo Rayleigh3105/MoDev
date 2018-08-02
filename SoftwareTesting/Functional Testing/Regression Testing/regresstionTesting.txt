@@ -1,0 +1,43 @@
+keyword = regression tests
+Software Testing Methods - What are Regresstion Test?
+
+Since I´m doing my blog post series about Software Testing Methods I want to learn more about Regression tests.
+So I decided that Iám going to write a blog post about it so I and maybe you can learn more about this Method, enjoy.
+
+What are Regression Tests ?
+Short Description:
+Regression test software testers usually understand the repetition of an existing test. They want to check if this test is still successful after a software change.
+
+Regression test is a test that is performed to make sure that previously working functionality still works, after changes elsewhere in the system.
+Wikipedia article is pretty good at explaining what it is. Your unit tests are automatically regression tests, and that's one of their biggest advantages. Once those tests are written, they will be run in future, whenever you add new functionality or change existing functionality.
+You don't need to explicitly write regression tests.
+
+Advantages Regresstion Test?
+t helps us to make sure that any changes like bug fixes or any enhancements to the module or application have not impacted the existing tested code.
+It ensures that the bugs found earlier are NOT reproduce-able.
+Regression testing can be done by using the Automation tools.
+It helps in improving the quality of the product.
+
+Uses
+Regression testing can be used not only for testing the correctness of a program but often also for tracking the quality of its output.
+For instance, in the design of a compiler, regression testing could track the code size and the time it takes to compile and execute the test suite cases.
+
+Techniques
+The various regression testing techniques are:
+
+Retest all
+This technique checks all the test cases on the current program to check its integrity.
+Though it is expensive as it needs to re-run all the cases, it ensures that there are no errors because of the modified code.
+
+Regression test selection
+Unlike Retest all, this technique runs a part of the test suite (owing to the cost of retest all) if the cost of selecting the part of the test suite is less than the Retest all technique.
+
+Test case prioritization
+Prioritize the test cases so as to increase a test suite's rate of fault detection. Test case prioritization techniques schedule test cases so that the test cases that are higher in priority are executed before the test cases that have a lower priority
+
+
+Thanks for reading through this if you like my content and my way to learn new things let me know.
+Ne next blog post will be about Integration Tests so stay in touch with my blog.
+Have a great day and keep learning
+
+Moritz Vogt

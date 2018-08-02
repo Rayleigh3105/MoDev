@@ -1,0 +1,64 @@
+In this blog post I´d like to tell you what I learned in the course I´m taking about NodeJS. I decided to document every Section what I learned.
+This Section is dedicated to the Fundamentals about NodeJs and Javascript. Let´s start of by learning more about Require.
+
+Require does three things:
+
+It loads modules that come bundled with Node.js like file system and HTTP from the Node.js API .
+It loads third party libraries like Express and Mongoose that you install from npm.
+It lets you require your own files and modularize the project.
+Require is a function, and it accepts a parameter “path” and returns module.exports.
+
+In the Editor it looks like this:
+
+What are Node Modules
+A Node module is a reusable block of code whose existence does not accidentally impact other code.
+
+You can write your own modules and use it in various application. Node.js has a set of built-in modules which you can use without any further installation.
+The node_modules folder is a libraries folder. The package.json file in the app root defines what libraries will be installed into node_modules when you run npm install
+
+Bsp of package.json
+
+
+
+Programming Stuff 
+
+- NodeMon
+When you write node code, you spin up the server and see your changes. You make some changes and restart the server again to see the changes.
+Nodemon will watch the files in the directory in which nodemon was started, and if any files change, nodemon will automatically restart your node application. Nodemon does not require any changes to your code or method of development. 
+
+How to Install nodemon
+You must install nodemon globally becausse it is a command line command. If you dont install nodemon globally it will only get installed in your directory you are currently in.
+
+npm install -g nodemon 
+
+How to start nodemon 
+
+Go to your root directory of your app and type into the terminal 
+nodemon app.js
+
+Now every time you make changes to your code and hit STRG + S nodemon will reload the server by itself. There is no need to restart the server manually.
+
+- Template Strings
+In JavaScript we have double quotes and single quotes to make a string. Now we have a third way to make a string, and that is with back-ticks = ``
+const name = 'Snickers';
+const age = 2;
+const sentence = `My dog ${name} is ${age * 7} years old.`;
+console.log(sentence);
+
+- Arrow Functions
+What are Arrow Functions
+Arrow functions – also called “fat arrow” functions, from CoffeeScript (a transcompiled language) — are a more concise syntax for writing function expressions. They utilize a new token, =>, that looks like a fat arrow. Arrow functions are anonymous and change the way this binds in functions.
+
+Arrow functions make our code more concise, and simplify function scoping and the this keyword. They are one-line mini functions which work much like Lambdas in other languages like C# or Python. (See also lambdas in JavaScript). By using arrow functions, we avoid having to type the function keyword, return keyword (it’s implicit in arrow functions), and curly brackets.
+// (param1, param2, paramN) => expression
+
+// ES5
+var multiplyES5 = function(x, y) {
+  return x * y;
+};
+
+// ES6
+const multiplyES6 = (x, y) => { return x * y };
+
+In this Section I learned what require is also I learned how to use nodemon, Template Strings and Arrow Functions. Also we created a little note app
+in this Section you can download the source code on my github account

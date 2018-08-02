@@ -1,0 +1,61 @@
+Keyword = unit test
+How to write Unit Test for RESTApiController - Beginners guide
+
+In this Blog post I´m going to show and explain to you how to write an functional Unit test for an RESTApiController. I´m testing following methods(GET, POST, PATCH, DELETE) with MockMvc.
+
+I recently wrote an Overview article about Software Testing now I´m going more specific about the methods of Functional Testing.
+I´m starting with Unit Testing. Aim of this blog post is to write an functional Unit test for an RESTApiController.
+I did manage to write an Unit test yesterday and I thought why not sharing my process of learning how to write Unit tests with you, so here you go.
+But first let´s clear what Unit Testing is.
+
+What is Unit Testing?
+Unit testing is usually performed by the developer who writes different code units. This type of test involves breaking your programm into pieces, and subjecting each piece to a series of tests.
+
+When should you perform unit tests?
+They should be done as often as possible. When you are performing tests as part of the development process, your code is automatically going to be designed better than if you just wrote the functions and then moved on.
+Also, concepts such as Dependency Injection are going to evolve naturally into your code.
+The most obvious benefit is knowing down the road that when a change is made, no other individual units of code were affected by it if they all pass the tests.
+
+How to perform a Unit Test for an RESTController ?
+
+So my RestController looks like this
+
+RESTController code
+
+I´m trying to write Unit Tests for each Method of the Controller. I´m doing that with Junit LINK.
+My Controller has following RequestMethods
+GET
+POST
+PATCH
+DELETE
+
+At first I´m trying to explain to you what Annotation you need to create a Unit Test for Spring.
+
+@RunWith(SpringRunner.class)
+The Annotation is uses to configure a unit test that required Spring dependency injection
+In order for the unit test to run a batch job, the framework must load the job's ApplicationContext. Two annotations are used to trigger this:
+@RunWith(SpringJUnit4ClassRunner.class): Indicates that the class should use Spring's JUnit facilities.
+@ContextConfiguration(locations = {...}): Indicates which XML files contain the ApplicationContext.
+
+@WebMvcTest(<Controller you want to test.class)
+Can be used when a test focuses only on Spring MVC components.
+
+@Autowired
+The @Autowired annotation tells Spring where an injection needs to occur.
+
+@Mockbean
+Annotation that can be used to add mocks to a Spring ApplicationContext
+
+@Before
+When writing tests, it is common to find that several tests need similar objects created before they can run. Annotating a public void method with @Before causes that method to be run before the Test method.
+
+@Test
+The Test annotation tells JUnit that the public void method to which it is attached can be run as a test case.
+
+What is MockMvc?
+MockMvc is the main entry point for server-side Spring MVC test support. Perform a request and return a type that allows chaining further actions, such as asserting expectations, on the result.
+
+Now lets move on with creating the Testclass for the unit test. My test class is located in the same package as the ApiControllers.
+Just create new new Test class called TestApiControllerTest. Now let´s setup the test with the above mentioned Annotations.
+
+RestControllerTest.class code

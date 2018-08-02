@@ -1,0 +1,63 @@
+Hello there,
+today I want to learn more about Node.js so I thought I make a little overview for it to remember the essential things about Node.js.
+Let´s start with the Introduction about Node.js
+6 min read
+------------------
+What is Node.js ?
+Node.js is an open source server enviroment
+Node.js runs on various platforms (Windows, Linux, Unix, Mac OS X, etc.)
+Node.js uses Javascript on the server
+Node.js provides a rich library of various JavaScript modules
+
+Definition of Node.js
+"Node.js is a platform built on Chrome's JavaScript runtime for easily building fast and scalable network applications.
+Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient, perfect for data-intensive real-time applications that run across distributed devices."
+
+What can Node.js Do?
+Node.js can generate dynamic page content
+Node.js can create,open,write,delete, an close files on the server
+Node.js can collect form data
+Node.js can add, delete, modify data in your database
+
+Get started with Node.js
+1. Download Node.js
+The offical Node.js website has installation instruction for Node.js https://nodejs.org
+
+For Mac users:
+code
+brew update
+brew install node
+
+2. Getting started
+After downloading and installing we are going to display "Hello from Modev" in a web browser.
+2.1 Create a Node.js file named "myFirst.js", and add the following code
+
+myfirst.js
+
+Now save the file on your computer : e.g. C:\Users\Your Name\myfirst.js
+Our written code tells the computer to write "Hello World from Modev!" if anyone (e.g. a web browser) tries to access your computer on port 8080.
+
+2.2 Command Line Interface
+Node.js files must be initiated in the "Command Line Interface" programm of your ycomputer.
+How to open the command line interface on your computer depends on the operating system. For Windows users, press the start button and look for "Command Prompt", or simply write "cmd" in the search field.
+
+Navigate to the folder that contains the file "myfirst.js", the command line interface window should look something like this:
+
+<code>
+C:\Users\Your Name>_
+
+2.3 Initiate the Node.js
+The file you have just created must be initiated by Node.js before any action can take place.
+Start your command line interface, write node myfirst.js and hit enter:
+
+Initiate "myfirst.js":
+C:\Users\Your Name>node myfirst.js
+
+Congrats your computer works now as a server!
+If anyone tries to access your computer on port 8080, they will get a "Hello World!" message in return!
+Start your internet browser, and type in the address: http://localhost:8080
+
+That was an short overview and quick start into Node.js. Make sure to leave an comment down below if you like this kind of tutorial.
+Have a great Day and keep learning!
+
+Moritz Vogt

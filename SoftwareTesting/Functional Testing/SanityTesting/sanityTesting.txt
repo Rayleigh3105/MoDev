@@ -1,0 +1,20 @@
+keyword = sanity Testing
+SOFTWARE TESTING METHODS – WHAT IS Sanity TESTING?
+
+I´m doing a blog series of Software Testing Methods I already published a post about Smoke Testing.
+Todays topic will be Sanity Testing we are going to clearify what it is and why you should use it.
+
+What is Sanity Testing?
+Short version:
+It is a rapid testing of features to check the basic features and stability. Testing basically boils down in finding fall/not fall and if there are no rough errors.
+
+Sanity testing is a testing type which is preformed when bugs are fixed by the developer or when there is a small change made in the existing functionality.
+Sanity Testing is done by an testing team to ensure that the functionality is working as expected.
+
+Sanity testing is also known to be a subset of regression testing and is performed before going for the regression testing in order to determine if there is any showstopper in the application which can be addressed at the earliest.
+
+Advantages of Sanity Testing:
+helps to avoid wasting time and cost involved in testing if the build has failed
+Sanity testing helps to identify the dependent missing objects.
+Sanity test is used to determine a small section of the application is still working after a minor change.
+Sanity testing can be narrow and deep. As a narrow regression test that focuses on one or a few areas of functionality.
